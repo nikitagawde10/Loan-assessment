@@ -29,8 +29,8 @@ export class HeaderComponent implements OnInit {
       this.userEmail = email;
       this.userInitial = email.charAt(0).toUpperCase();
     } else {
-      this.userEmail = 'sumeet.darade@neoquant.com';
-      this.userInitial = 'S';
+      this.userEmail = 'admin@admin.com';
+      this.userInitial = 'A';
     }
   }
 
