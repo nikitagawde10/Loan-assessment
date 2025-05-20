@@ -1,0 +1,38 @@
+# ⚙️ Compiled output
+/dist
+/out-tsc
+
+# ⚙️ Dependency directories
+/node_modules
+
+# 👨‍💻 IDE settings
+.vscode/
+.idea/
+
+# 📦 Local environment files
+.env
+.env.*.local
+
+# 🔧 Angular build artifacts
+.angular/
+coverage/
+*.tgz
+
+# ⚠️ System files
+.DS_Store
+Thumbs.db
+
+# 🚫 Logs and OS junk
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json # Optional — keep if you want consistent builds
+
+# 🔥 Misc
+*.swp
+*.swo
+
+# 💅 Optional for Prettier or ESLint
+*.log
+node_modules/
+.env
