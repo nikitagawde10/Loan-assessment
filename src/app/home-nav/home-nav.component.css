@@ -1,0 +1,45 @@
+.sidenav-container {
+  height: calc(100vh - 64px);
+}
+
+.sidenav {
+  width: 250px;
+  background-color: #023869;
+}
+
+.sidenav-content {
+  padding-top: 20px;
+}
+
+.content-container {
+  padding: 20px;
+  height: 100%;
+}
+
+mat-nav-list a {
+  color: white;
+  margin-bottom: 5px;
+}
+
+.active-link {
+  background-color: rgba(214, 205, 205, 0.1);
+}
+
+.mat-expansion-panel {
+  background-color: #023869;
+  box-shadow: none;
+}
+
+.mat-expansion-indicator svg {
+  fill: white !important;
+}
+
+::ng-deep .mat-expansion-indicator svg {
+  fill: white !important;
+  color: white !important;
+  stroke: white !important;
+}
+
+.link-label {
+  color: white;
+}

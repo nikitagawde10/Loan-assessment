@@ -1,0 +1,46 @@
+<div class="user-container">
+  <h1>User Management</h1>
+  <button
+    mat-flat-button
+    style="border-radius: 10px"
+    class="create-user-btn"
+    (click)="openCreateUserDialog()"
+  >
+    Create User
+  </button>
+  <table mat-table [dataSource]="dataSource" class="users-table">
+    <ng-container matColumnDef="userName">
+      <th mat-header-cell *matHeaderCellDef class="table-header">Username</th>
+      <td mat-cell *matCellDef="let user">{{ user.userName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef class="table-header">Email</th>
+      <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef class="table-header">Name</th>
+      <td mat-cell *matCellDef="let user">{{ user.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="roles">
+      <th mat-header-cell *matHeaderCellDef class="table-header">Roles</th>
+      <td mat-cell *matCellDef="let user">{{ user.roles }}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef class="table-header">Actions</th>
+      <td mat-cell *matCellDef="let user">
+        <button
+          mat-flat-button
+          class="actions-button"
+          (click)="editClicked(user)"
+        >
+          Edit
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

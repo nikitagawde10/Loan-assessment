@@ -1,0 +1,11 @@
+.roles-table {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+}
+.table-header {
+  font-weight: bolder;
+}
+
+.mat-column-protected {
+  border-left: 1px solid #ccc;
+}

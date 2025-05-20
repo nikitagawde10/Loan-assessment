@@ -1,0 +1,53 @@
+<div class="documents-container">
+  <h1>Upload Documents</h1>
+
+  <div class="document-section">
+    <div class="document-label">Aadhaar Document</div>
+    <div class="file-input-container">
+      <input
+        type="file"
+        #aadhaarFileInput
+        style="display: none"
+        (change)="onAadhaarFileSelected($event)"
+      />
+      <button
+        mat-stroked-button
+        class="choose-file-btn"
+        (click)="aadhaarFileInput.click()"
+      >
+        Choose File
+      </button>
+      <span class="file-name">{{ aadhaarFileName || "No file chosen" }}</span>
+    </div>
+  </div>
+
+  <div class="document-section">
+    <div class="document-label">PAN Document</div>
+    <div class="file-input-container">
+      <input
+        type="file"
+        #panFileInput
+        style="display: none"
+        (change)="onPanFileSelected($event)"
+      />
+      <button
+        mat-stroked-button
+        class="choose-file-btn"
+        (click)="panFileInput.click()"
+      >
+        Choose File
+      </button>
+      <span class="file-name">{{ panFileName || "No file chosen" }}</span>
+    </div>
+  </div>
+
+  <button
+    mat-flat-button
+    color="primary"
+    class="upload-btn"
+    (click)="uploadFiles()"
+    [disabled]="!isReadyToUpload()"
+  >
+    Upload
+  </button>
+</div>

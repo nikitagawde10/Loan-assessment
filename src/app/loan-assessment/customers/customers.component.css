@@ -1,0 +1,23 @@
+.customers-container {
+  padding: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.table-header {
+  font-weight: bolder;
+}
+
+.customers-table {
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+}
+.mat-column-name,
+.mat-column-panNumber,
+.mat-column-aadharNumber {
+  border-left: 1px solid #ccc;
+}

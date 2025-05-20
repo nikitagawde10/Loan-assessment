@@ -1,0 +1,75 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav class="sidenav" mode="side" opened>
+    <div class="sidenav-content">
+      <mat-expansion-panel
+        hideToggle="false"
+        expanded="true"
+        class="sidenav-expansion-panel"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title class="link-label">
+            User Management
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <a
+            mat-list-item
+            [routerLink]="['/users']"
+            routerLinkActive="active-link"
+          >
+            <span class="link-label">Users</span>
+          </a>
+          <a
+            mat-list-item
+            [routerLink]="['/roles']"
+            routerLinkActive="active-link"
+          >
+            <span class="link-label">Roles</span>
+          </a>
+          <a
+            mat-list-item
+            [routerLink]="['/permissions']"
+            routerLinkActive="active-link"
+          >
+            <span class="link-label">Permissions</span>
+          </a>
+        </mat-nav-list>
+      </mat-expansion-panel>
+      <mat-expansion-panel hideToggle="false">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="link-label">
+            Loan Assessment
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <a
+            mat-list-item
+            [routerLink]="['/upload-documents']"
+            routerLinkActive="active-link"
+          >
+            <span class="link-label">Upload Documents</span>
+          </a>
+          <a
+            mat-list-item
+            [routerLink]="['/customers']"
+            routerLinkActive="active-link"
+          >
+            <span class="link-label">Customers</span>
+          </a>
+          <a
+            mat-list-item
+            [routerLink]="['/work-orders']"
+            routerLinkActive="active-link"
+          >
+            <span class="link-label">Work Orders</span>
+          </a>
+        </mat-nav-list>
+      </mat-expansion-panel>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content-container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

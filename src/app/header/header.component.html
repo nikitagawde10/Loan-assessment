@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+  <div class="brand">Brand Logo</div>
+  <span class="spacer"></span>
+  <div class="user-info">
+    <span>{{ userEmail }}</span>
+    <button
+      class="avatar-button"
+      mat-icon-button
+      [matMenuTriggerFor]="userMenu"
+    >
+      <div class="user-avatar">{{ userInitial }}</div>
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item>Profile</button>
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

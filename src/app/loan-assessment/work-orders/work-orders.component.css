@@ -1,0 +1,40 @@
+.work-orders-container {
+  padding: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.work-orders-table {
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+}
+
+.pending {
+  background-color: #fff9c4 !important;
+  color: #f57f17 !important;
+}
+
+.approved {
+  background-color: #c8e6c9 !important;
+  color: #2e7d32 !important;
+}
+
+.rejected {
+  background-color: #ffcdd2 !important;
+  color: #c62828 !important;
+}
+.mat-column-orderId,
+.mat-column-customer,
+.mat-column-date,
+.mat-column-status {
+  border-left: 1px solid #ccc;
+}
+
+.table-header {
+  font-weight: bolder;
+}
