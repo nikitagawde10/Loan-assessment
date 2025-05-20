@@ -34,12 +34,6 @@ mat-nav-list a {
   fill: white !important;
 }
 
-::ng-deep .mat-expansion-indicator svg {
-  fill: white !important;
-  color: white !important;
-  stroke: white !important;
-}
-
 .link-label {
   color: white;
 }
