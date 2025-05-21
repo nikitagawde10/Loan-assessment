@@ -44,14 +44,14 @@
   <button
     mat-flat-button
     color="primary"
-    class="upload-btn"
+    class="upload-button"
     (click)="uploadFiles()"
     [disabled]="!isReadyToUpload()"
   >
     Upload
   </button>
   <button
-    mat-flat-button
+    mat-stroked-button
     class="cancel-button"
     type="button"
     (click)="resetFields()"

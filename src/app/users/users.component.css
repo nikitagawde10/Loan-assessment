@@ -7,7 +7,7 @@
 }
 
 .user-container {
-  padding: 20px;
+  margin-top: 20px;
 }
 
 h1 {
@@ -15,7 +15,6 @@ h1 {
 }
 
 .create-user-btn {
-  background-color: #007bff;
   color: white;
   margin-bottom: 20px;
 }

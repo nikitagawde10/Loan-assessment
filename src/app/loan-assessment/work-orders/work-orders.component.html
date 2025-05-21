@@ -1,7 +1,11 @@
 <div class="work-orders-container">
   <h1>Work Orders</h1>
 
-  <table mat-table [dataSource]="dataSource" class="work-orders-table">
+  <table
+    mat-table
+    [dataSource]="(dataSource$ | async) ?? []"
+    class="work-orders-table"
+  >
     <!-- Order ID Column -->
     <ng-container matColumnDef="orderId">
       <th mat-header-cell *matHeaderCellDef class="table-header">Order ID</th>
@@ -24,11 +28,23 @@
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef class="table-header">Status</th>
       <td mat-cell *matCellDef="let order">
-        <mat-chip-listbox>
-          <mat-chip [ngClass]="order.status.toLowerCase()">{{
-            order.status
-          }}</mat-chip>
-        </mat-chip-listbox>
+        <mat-chip
+          [matMenuTriggerFor]="menu"
+          class="status-chip"
+          [ngClass]="order.status.toLowerCase()"
+        >
+          {{ order.status }}
+        </mat-chip>
+
+        <mat-menu #menu="matMenu" class="status-menu">
+          <mat-chip
+            *ngFor="let status of statusOptions"
+            (click)="onStatusChange(order.orderId, status)"
+            [ngClass]="['status-option-chip', status.toLowerCase()]"
+          >
+            {{ status }}
+          </mat-chip>
+        </mat-menu>
       </td>
     </ng-container>
 

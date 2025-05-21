@@ -40,8 +40,6 @@ export class UploadDocumentsComponent {
   }
 
   uploadFiles(): void {
-    // In a real application, you would send these files to a server
-    // For now, we'll just show a success message
     setTimeout(() => {
       this.snackBar.open('Documents uploaded successfully!', 'Close', {
         duration: 3000,
@@ -50,16 +48,13 @@ export class UploadDocumentsComponent {
       });
 
       // Reset form
-      this.aadhaarFile = null;
-      this.panFile = null;
-      this.aadhaarFileName = '';
-      this.panFileName = '';
+      this.resetFields();
     }, 1500);
   }
-  resetFields() {
+  resetFields = () => {
     this.aadhaarFile = null;
     this.panFile = null;
     this.aadhaarFileName = '';
     this.panFileName = '';
-  }
+  };
 }

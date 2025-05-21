@@ -1,34 +1,46 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { MatChip, MatChipListbox } from '@angular/material/chips';
-import { MatTable, MatTableModule } from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
+import { MatTableModule } from '@angular/material/table';
+import { MatChipsModule } from '@angular/material/chips';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import {
+  WorkOrder,
+  WorkOrderStatus,
+} from '../../redux/work-orders/workOrders.state';
+import { selectAllWorkOrders } from '../../redux/work-orders/workOrder.selectors';
+import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
+import { changeWorkOrderStatus } from '../../redux/work-orders/workOrder.action';
 
 @Component({
   selector: 'app-work-orders',
-  imports: [MatChip, MatChipListbox, CommonModule, MatTable, MatTableModule],
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatChipsModule,
+    MatMenu,
+    MatMenuTrigger,
+  ],
   templateUrl: './work-orders.component.html',
-  styleUrl: './work-orders.component.css',
+  styleUrls: ['./work-orders.component.css'],
 })
-export class WorkOrdersComponent {
+export class WorkOrdersComponent implements OnInit {
+  statusOptions: WorkOrderStatus[] = ['Pending', 'Approved', 'Rejected'];
+
   displayedColumns: string[] = ['orderId', 'customer', 'date', 'status'];
-  dataSource = [
-    {
-      orderId: 'WO-1001',
-      customer: 'John Doe',
-      date: '2025-05-15',
-      status: 'Approved',
-    },
-    {
-      orderId: 'WO-1002',
-      customer: 'Jane Smith',
-      date: '2025-05-17',
-      status: 'Pending',
-    },
-    {
-      orderId: 'WO-1003',
-      customer: 'Bob Johnson',
-      date: '2025-05-18',
-      status: 'Rejected',
-    },
-  ];
+
+  dataSource$!: Observable<WorkOrder[]>;
+
+  constructor(private store: Store) {}
+
+  ngOnInit(): void {
+    this.dataSource$ = this.store.select(selectAllWorkOrders);
+  }
+
+  onStatusChange(orderId: string, newStatus: string) {
+    this.store.dispatch(
+      changeWorkOrderStatus({ workOrderId: orderId, status: newStatus as any })
+    );
+  }
 }
