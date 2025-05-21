@@ -16,7 +16,6 @@ export const routes: Routes = [
   { path: 'home', component: HomeNavComponent },
   { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
   { path: 'roles', component: UserRolesComponent, canActivate: [AuthGuard] },
-  { path: '**', component: PageNotFoundComponent },
   {
     path: 'permissions',
     component: UserPermissionsComponent,
@@ -37,4 +36,5 @@ export const routes: Routes = [
     component: WorkOrdersComponent,
     canActivate: [AuthGuard],
   },
+  { path: '**', component: PageNotFoundComponent },
 ];
