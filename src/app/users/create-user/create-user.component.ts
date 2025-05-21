@@ -34,10 +34,11 @@ export class CreateUserComponent {
     private dialogRef: MatDialogRef<CreateUserComponent>
   ) {
     this.createUserForm = this.fb.group({
-      username: ['', [Validators.required]],
+      userName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       name: ['', [Validators.required]],
-      role: ['', [Validators.required]],
+      roleName: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     });
   }
 
