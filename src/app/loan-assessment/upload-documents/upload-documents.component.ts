@@ -56,4 +56,10 @@ export class UploadDocumentsComponent {
       this.panFileName = '';
     }, 1500);
   }
+  resetFields() {
+    this.aadhaarFile = null;
+    this.panFile = null;
+    this.aadhaarFileName = '';
+    this.panFileName = '';
+  }
 }

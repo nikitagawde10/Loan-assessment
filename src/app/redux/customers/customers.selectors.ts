@@ -2,7 +2,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { CustomersState } from './customers.state';
 
 export const selectCustomersState =
-  createFeatureSelector<CustomersState>('customers'); // ← this must match key in AppState
+  createFeatureSelector<CustomersState>('customers');
 
 export const selectAllCustomers = createSelector(
   selectCustomersState,

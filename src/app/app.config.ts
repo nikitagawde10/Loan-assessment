@@ -8,11 +8,11 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient } from '@angular/common/http';
 
 import { routes } from './app.routes';
-import { provideState, provideStore } from '@ngrx/store';
+import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideEffects } from '@ngrx/effects';
 
-import { customersReducer } from './redux/customers/customers.reducer';
+import { stateProviders } from './redux';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,12 +20,9 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimations(),
     provideHttpClient(),
-    provideStore(), // Root store
+    provideStore(),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideEffects(),
-    provideState({
-      name: 'customers',
-      reducer: customersReducer,
-    }),
+    ...stateProviders,
   ],
 };
