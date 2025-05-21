@@ -12,4 +12,4 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-To view the website go to https://682c2bdede82e972bdef2b7d--lucky-mandazi-c98253.netlify.app/
+To view the website [click here](https://682c2bdede82e972bdef2b7d--lucky-mandazi-c98253.netlify.app/login)
