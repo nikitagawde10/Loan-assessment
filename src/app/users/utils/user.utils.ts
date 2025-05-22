@@ -1,4 +1,4 @@
-import { User } from '../../redux/user-credentials/user.state';
+import { User } from '../../redux/user/user.state';
 
 export const generateUserId = (): string => {
   return Math.random().toString(36).substring(2, 10);
