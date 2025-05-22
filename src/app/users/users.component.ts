@@ -6,15 +6,16 @@ import { MatTableModule } from '@angular/material/table';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { Store } from '@ngrx/store';
 import { selectAllUsers } from '../redux/user-credentials/user.selectors';
-import { addUser } from '../redux/user-credentials/user.action';
+import { addUser, deleteUser } from '../redux/user-credentials/user.action';
 import { User } from '../redux/user-credentials/user.state';
 import { mapResultToUser } from './utils/user.utils';
 import { Observable } from 'rxjs';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatTableModule],
+  imports: [CommonModule, MatButtonModule, MatTableModule, MatIcon],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css'],
 })
@@ -45,6 +46,11 @@ export class UsersComponent implements OnInit {
         this.store.dispatch(addUser({ user: mapResultToUser(result) }));
       }
     });
+  }
+
+  deleteClicked(userId: string): void {
+    console.log('Delete clicked for user ID:', userId);
+    this.store.dispatch(deleteUser({ deleteUserId: userId }));
   }
 
   editClicked(user: User): void {
