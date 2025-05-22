@@ -1,6 +1,12 @@
 <div class="roles-container">
   <h1>Role Management</h1>
-  <button mat-flat-button style="border-radius: 10px" color="primary">
+  <button
+    mat-flat-button
+    style="border-radius: 10px"
+    class="create-role-btn"
+    color="primary"
+    (click)="openCreateRoleDialog()"
+  >
     Add Role
   </button>
   <table mat-table [dataSource]="dataSource" class="roles-table">

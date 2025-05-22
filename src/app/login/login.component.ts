@@ -44,7 +44,7 @@ export class LoginComponent {
 
       this.authService.login(email, password).subscribe((success) => {
         if (success) {
-          this.router.navigate(['/upload-documents']);
+          this.router.navigate(['/users']);
         }
       });
     }
