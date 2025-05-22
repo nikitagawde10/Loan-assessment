@@ -12,6 +12,7 @@ import { UploadDocumentsComponent } from './loan-assessment/upload-documents/upl
 import { WorkOrdersComponent } from './loan-assessment/work-orders/work-orders.component';
 
 export const routes: Routes = [
+  { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeNavComponent },
   { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
