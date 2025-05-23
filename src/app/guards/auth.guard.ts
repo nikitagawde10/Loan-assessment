@@ -13,9 +13,7 @@ import {
 import { Observable, combineLatest } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class AuthGuard {
   private store = inject(Store);
   private router = inject(Router);
@@ -24,43 +22,41 @@ export class AuthGuard {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> {
-    let currentRouteState = state.root;
-    while (currentRouteState.firstChild) {
-      currentRouteState = currentRouteState.firstChild;
+    // 🔍 Traverse to the deepest child route to get route-specific data
+    let targetRoute = route;
+    while (targetRoute.firstChild) {
+      targetRoute = targetRoute.firstChild;
     }
-    const allowedRoles = currentRouteState.data['roles'] as string[];
 
-    console.log('AuthGuard: Accessing route:', state.url);
-    console.log('AuthGuard: Allowed roles for this route:', allowedRoles);
+    const allowedRoles = targetRoute.data['roles'] as string[] | undefined;
 
     return combineLatest([
       this.store.select(selectIsLoggedIn),
       this.store.select(selectUserRole),
     ]).pipe(
-      take(1),
+      take(1), // Only take one emission
       tap(([isLoggedIn, userRole]) => {
-        console.log('AuthGuard: Current login status:', isLoggedIn);
-        console.log('AuthGuard: Current user role:', userRole);
+        console.log('AuthGuard: Route =', state.url);
+        console.log('AuthGuard: Allowed roles =', allowedRoles);
+        console.log('AuthGuard: Logged in =', isLoggedIn);
+        console.log('AuthGuard: User role =', userRole);
       }),
       map(([isLoggedIn, userRole]) => {
+        // 🛑 If user is not logged in, redirect to login
         if (!isLoggedIn) {
-          console.log('AuthGuard: Not logged in, redirecting to /login');
           return this.router.parseUrl('/login');
         }
 
-        if (allowedRoles && allowedRoles.length > 0) {
+        // ✅ If route has role restrictions, validate them
+        if (allowedRoles?.length) {
           if (userRole && allowedRoles.includes(userRole)) {
-            console.log('AuthGuard: Role authorized, allowing access');
-            return true;
+            return true; // Access granted
           } else {
-            console.log(
-              'AuthGuard: Role not authorized, redirecting to /login'
-            );
-            return this.router.parseUrl('/forbidden');
+            return this.router.parseUrl('/forbidden'); // ❌ Forbidden
           }
         }
 
-        console.log('AuthGuard: No specific roles required, allowing access');
+        // ✅ If no roles specified, allow access
         return true;
       })
     );
