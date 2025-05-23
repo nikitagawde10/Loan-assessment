@@ -109,7 +109,12 @@ h1 {
   color: #c62828 !important;
   border: 1px solid #c62828 !important;
 }
+::ng-deep .mat-mdc-chip .mdc-evolution-chip__cell--primary {
+  flex-basis: unset !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
 
-.mdc-evolution-chip__cell--primary {
-  flex-basis: auto;
+.mat-mdc-standard-chip .mdc-evolution-chip__action--primary {
+  padding: 0px !important;
 }
