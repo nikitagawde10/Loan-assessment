@@ -20,3 +20,9 @@ h1 {
 .mat-column-aadharNumber {
   border-left: 1px solid #ccc;
 }
+
+.mat-mdc-cell,
+.mat-mdc-header-cell {
+  padding: 0 16px;
+  text-align: center;
+}

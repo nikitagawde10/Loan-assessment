@@ -24,6 +24,12 @@ h1 {
   font-weight: bolder;
 }
 
+.mat-mdc-cell,
+.mat-mdc-header-cell {
+  padding: 0 16px;
+  text-align: center;
+}
+
 .status-trigger {
   all: unset;
   cursor: pointer;
