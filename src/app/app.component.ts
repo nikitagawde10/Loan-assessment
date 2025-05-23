@@ -7,7 +7,6 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { HeaderComponent } from './header/header.component';
 import { HomeNavComponent } from './home-nav/home-nav.component';
-import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
 import { Subscription, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -26,7 +25,6 @@ import { tap } from 'rxjs/operators';
     MatIconModule,
     HomeNavComponent,
     HeaderComponent,
-    LoginComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -41,9 +39,11 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.isLoggedIn$ = this.store.select(selectIsLoggedIn);
 
-    this.authSubscription = this.isLoggedIn$.pipe(
-      tap(loggedIn => console.log('AppComponent: isLoggedIn$', loggedIn))
-    ).subscribe();
+    this.authSubscription = this.isLoggedIn$
+      .pipe(
+        tap((loggedIn) => console.log('AppComponent: isLoggedIn$', loggedIn))
+      )
+      .subscribe();
   }
 
   ngOnDestroy(): void {

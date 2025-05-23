@@ -2,16 +2,18 @@
   <div class="brand">Brand Logo</div>
   <span class="spacer"></span>
   <div class="user-info">
-    <span *ngIf="(userEmail$ | async) as userEmail">{{ userEmail }}</span>
+    <span *ngIf="userEmail$ | async as userEmail">{{ userEmail }}</span>
     <button
       class="avatar-button"
       mat-icon-button
       [matMenuTriggerFor]="userMenu"
     >
-      <div class="user-avatar" *ngIf="(userEmail$ | async) as userEmail">{{ userEmail.charAt(0).toUpperCase() }}</div>
+      <div class="user-avatar" *ngIf="userEmail$ | async as userEmail">
+        {{ (userEmail || "").charAt(0).toUpperCase() }}
+      </div>
     </button>
     <mat-menu #userMenu="matMenu">
-      <button mat-menu-item>Profile</button>
+      <button mat-menu-item (click)="openUserProfile()">Profile</button>
       <button mat-menu-item (click)="logout()">Logout</button>
     </mat-menu>
   </div>
