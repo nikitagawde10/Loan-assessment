@@ -53,8 +53,13 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: ['admin', 'superadmin', 'hr'] },
   },
-  { path: 'user-profile/:id', component: UserProfileComponent },
-
+  {
+    path: 'user-profile/:id',
+    loadComponent: () =>
+      import('./users/user-profile/user-profile.component').then(
+        (m) => m.UserProfileComponent
+      ),
+  },
   // 🚫 Fallback for invalid routes
   { path: '**', component: PageNotFoundComponent },
 ];

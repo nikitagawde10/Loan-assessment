@@ -20,6 +20,7 @@ export class UserProfileComponent implements OnInit {
   constructor(private route: ActivatedRoute, private store: Store) {}
 
   ngOnInit(): void {
+    console.log('UserProfileComponent initialized');
     this.user$ = this.route.paramMap.pipe(
       map((params) => params.get('id')!),
       switchMap((userId) => this.store.select(selectUserById(userId)))
