@@ -17,3 +17,7 @@ export const addUserRole = createAction(
   '[UserRoles] Add UserRole',
   props<{ role: UserRole }>()
 );
+export const deleteRole = createAction(
+  '[UserRoles] Delete UserRole',
+  props<{ roleName: string }>()
+);

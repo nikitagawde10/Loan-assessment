@@ -9,7 +9,11 @@
   >
     Add Role
   </button>
-  <table mat-table [dataSource]="dataSource" class="roles-table">
+  <table
+    mat-table
+    [dataSource]="(dataSource$ | async) ?? []"
+    class="roles-table"
+  >
     <ng-container matColumnDef="roleName">
       <th mat-header-cell *matHeaderCellDef class="table-header">Role Name</th>
       <td mat-cell *matCellDef="let role">{{ role.roleName }}</td>
@@ -19,7 +23,20 @@
       <th mat-header-cell *matHeaderCellDef class="table-header">Protected</th>
       <td mat-cell *matCellDef="let role">{{ role.protected }}</td>
     </ng-container>
-
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef class="table-header">Actions</th>
+      <td mat-cell *matCellDef="let role">
+        <div class="role-actions">
+          <button
+            mat-mini-fab
+            class="delete-button"
+            (click)="deleteClicked(role.roleName)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>

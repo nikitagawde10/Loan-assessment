@@ -60,7 +60,7 @@ h1 {
 
 .user-actions {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   gap: 12px;
   min-width: 150px;
   align-items: center;

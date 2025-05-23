@@ -2,10 +2,36 @@
   margin-top: 20px;
   border: 1px solid #ccc;
 }
-.table-header {
-  font-weight: bolder;
+.mat-mdc-cell {
+  padding: 0 16px;
+  text-align: center;
 }
 
-.mat-column-protected {
+.table-header {
+  font-weight: bolder;
+  text-align: center;
+}
+
+.mat-column-protected,
+.mat-column-actions {
   border-left: 1px solid #ccc;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: white;
+  align-items: center;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+.delete-button:focus {
+  outline: none;
+}
+
+.delete-button:focus-visible {
+  outline: 2px solid #dc3545;
+  outline-offset: 2px;
 }

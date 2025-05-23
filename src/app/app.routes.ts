@@ -9,6 +9,7 @@ import { UploadDocumentsComponent } from './loan-assessment/upload-documents/upl
 import { WorkOrdersComponent } from './loan-assessment/work-orders/work-orders.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AccessForbiddenComponent } from './access-forbidden/access-forbidden.component';
+import { UserProfileComponent } from './users/user-profile/user-profile.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -52,6 +53,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: ['admin', 'superadmin', 'hr'] },
   },
+  { path: 'user-profile/:id', component: UserProfileComponent },
 
   // 🚫 Fallback for invalid routes
   { path: '**', component: PageNotFoundComponent },
