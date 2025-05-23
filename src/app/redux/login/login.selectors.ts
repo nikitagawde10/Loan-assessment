@@ -17,3 +17,9 @@ export const selectLoggedInUser = createSelector(
   selectLoginState,
   (state) => state.loggedInUser
 );
+
+// Selector to get the role of the logged-in user
+export const selectUserRole = createSelector(
+  selectLoggedInUser,
+  (user) => user ? user.roleName : null
+);
