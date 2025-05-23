@@ -1,39 +1,44 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
+import { Injectable, inject } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { loginSuccess, logout } from './redux/login/login.action';
+import { selectUser } from './redux/user/user.selectors';
+import { selectLoggedInUser } from './redux/login/login.selectors';
+import { take, map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AuthService {
-  private loggedIn = new BehaviorSubject<boolean>(false);
+  private store = inject(Store);
 
-  constructor() {
-    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-    this.loggedIn.next(isLoggedIn);
-  }
+  constructor() {}
 
-  login(username: string, password: string): Observable<boolean> {
-    localStorage.setItem("isLoggedIn", "true");
-    localStorage.setItem("userEmail", username);
-    this.loggedIn.next(true);
-    return this.loggedIn.asObservable();
+  login(email: string, password: string): Observable<boolean> {
+    // Use the selectUser selector which finds the user based on email and password
+    return this.store.select(selectUser(email, password)).pipe(
+      take(1), // Take only the first value emitted by the selector
+      map((foundUser) => {
+        if (foundUser) {
+          // Dispatch loginSuccess with the found user
+          this.store.dispatch(loginSuccess({ user: foundUser }));
+          return true; // Indicate successful login
+        } else {
+          return false; // Indicate login failure
+        }
+      })
+    );
   }
 
   logout(): void {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("userEmail");
-    this.loggedIn.next(false);
+    // Dispatch logout action
+    this.store.dispatch(logout());
   }
 
-  isLoggedIn(): boolean {
-    return this.loggedIn.value;
-  }
-
-  getUserEmail(): string | null {
-    return localStorage.getItem("userEmail");
-  }
-
-  getLoggedInStatus(): Observable<boolean> {
-    return this.loggedIn.asObservable();
+  // Method to get the logged-in user's email from the store
+  getUserEmail(): Observable<string | null> {
+    return this.store.select(selectLoggedInUser).pipe(
+      map((user) => (user ? user.email : null)) // Map the user object to the email or null
+    );
   }
 }

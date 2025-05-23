@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { UserState } from './user.state';
+import { User, UserState } from './user.state';
 
 export const selectUsersState = createFeatureSelector<UserState>('users');
 
@@ -23,20 +23,7 @@ export const selectUsersError = createSelector(
   (state) => state.error
 );
 
-export const selectProtectedUsers = createSelector(selectAllUsers, (users) =>
-  users.filter((user) => user.protected === 'yes')
-);
-
-export const selectUsersByRole = (roleName: string) =>
+export const selectUser = (email: string, password: string) =>
   createSelector(selectAllUsers, (users) =>
-    users.filter((user) => user.roleName === roleName)
+    users.find((user) => user.email === email && user.password === password)
   );
-
-export const selectTotalUsers = createSelector(
-  selectAllUsers,
-  (users) => users.length
-);
-
-export const selectAllAdmins = createSelector(selectAllUsers, (users) =>
-  users.filter((u) => u.roleName === 'admin' || u.roleName === 'superadmin')
-);

@@ -1,7 +1,6 @@
 // src/app/app.routes.ts
 import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { HomeNavComponent } from './home-nav/home-nav.component';
 import { UsersComponent } from './users/users.component';
 import { UserRolesComponent } from './users/user-roles/user-roles.component';
 import { UserPermissionsComponent } from './users/user-permissions/user-permissions.component';
@@ -12,30 +11,19 @@ import { UploadDocumentsComponent } from './loan-assessment/upload-documents/upl
 import { WorkOrdersComponent } from './loan-assessment/work-orders/work-orders.component';
 
 export const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeNavComponent },
-  { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
-  { path: 'roles', component: UserRolesComponent, canActivate: [AuthGuard] },
   {
-    path: 'permissions',
-    component: UserPermissionsComponent,
+    path: '',
     canActivate: [AuthGuard],
-  },
-  {
-    path: 'upload-documents',
-    component: UploadDocumentsComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'customers',
-    component: CustomersComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'work-orders',
-    component: WorkOrdersComponent,
-    canActivate: [AuthGuard],
+    children: [
+      { path: 'users', component: UsersComponent },
+      { path: 'roles', component: UserRolesComponent },
+      { path: 'permissions', component: UserPermissionsComponent },
+      { path: 'upload-documents', component: UploadDocumentsComponent },
+      { path: 'customers', component: CustomersComponent },
+      { path: 'work-orders', component: WorkOrdersComponent },
+    ],
   },
   { path: '**', component: PageNotFoundComponent },
 ];
