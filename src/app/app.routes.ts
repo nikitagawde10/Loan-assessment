@@ -19,7 +19,7 @@ export const routes: Routes = [
     path: 'users',
     component: UsersComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['user', 'admin', 'superadmin'] },
+    data: { roles: ['user', 'admin', 'superadmin', 'hr'] },
   },
   { path: 'forbidden', component: AccessForbiddenComponent },
   {
@@ -44,13 +44,13 @@ export const routes: Routes = [
     path: 'customers',
     component: CustomersComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['admin', 'superadmin'] },
+    data: { roles: ['admin', 'user', 'superadmin', 'hr'] },
   },
   {
     path: 'work-orders',
     component: WorkOrdersComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['admin', 'superadmin'] },
+    data: { roles: ['admin', 'superadmin', 'hr'] },
   },
 
   // 🚫 Fallback for invalid routes
