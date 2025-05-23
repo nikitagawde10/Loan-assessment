@@ -37,7 +37,6 @@ export const selectTotalUsers = createSelector(
   (users) => users.length
 );
 
-export const selectAdminCount = createSelector(
-  selectAllUsers,
-  (users) => users.filter((u) => u.roleName === 'admin').length
+export const selectAllAdmins = createSelector(selectAllUsers, (users) =>
+  users.filter((u) => u.roleName === 'admin' || u.roleName === 'superadmin')
 );
