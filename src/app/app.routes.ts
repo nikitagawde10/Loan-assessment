@@ -21,37 +21,67 @@ export const routes: Routes = [
     component: UsersComponent,
     canActivate: [AuthGuard],
     data: { roles: ['user', 'admin', 'superadmin', 'hr'] },
+    loadComponent: () =>
+      import('./users/users.component').then((m) => m.UsersComponent),
   },
-  { path: 'forbidden', component: AccessForbiddenComponent },
+  {
+    path: 'forbidden',
+    component: AccessForbiddenComponent,
+    loadComponent: () =>
+      import('./access-forbidden/access-forbidden.component').then(
+        (m) => m.AccessForbiddenComponent
+      ),
+  },
   {
     path: 'roles',
     component: UserRolesComponent,
     canActivate: [AuthGuard],
     data: { roles: ['admin', 'superadmin'] },
+    loadComponent: () =>
+      import('./users/user-roles/user-roles.component').then(
+        (m) => m.UserRolesComponent
+      ),
   },
   {
     path: 'permissions',
     component: UserPermissionsComponent,
     canActivate: [AuthGuard],
     data: { roles: ['admin', 'superadmin'] },
+    loadComponent: () =>
+      import('./users/user-permissions/user-permissions.component').then(
+        (m) => m.UserPermissionsComponent
+      ),
   },
   {
     path: 'upload-documents',
     component: UploadDocumentsComponent,
     canActivate: [AuthGuard],
     data: { roles: ['admin', 'superadmin'] },
+    loadComponent: () =>
+      import(
+        './loan-assessment/upload-documents/upload-documents.component'
+      ).then((m) => m.UploadDocumentsComponent),
   },
   {
     path: 'customers',
     component: CustomersComponent,
     canActivate: [AuthGuard],
     data: { roles: ['admin', 'user', 'superadmin', 'hr'] },
+    loadComponent: () => {
+      return import('./loan-assessment/customers/customers.component').then(
+        (m) => m.CustomersComponent
+      );
+    },
   },
   {
     path: 'work-orders',
     component: WorkOrdersComponent,
     canActivate: [AuthGuard],
     data: { roles: ['admin', 'superadmin', 'hr'] },
+    loadComponent: () =>
+      import('./loan-assessment/work-orders/work-orders.component').then(
+        (m) => m.WorkOrdersComponent
+      ),
   },
   {
     path: 'user-profile/:id',
