@@ -1,4 +1,4 @@
-import { generateUserId } from '../../users/utils/user.utils';
+import { generateUserId } from '../utils/user.utils';
 
 export interface User {
   id: string;

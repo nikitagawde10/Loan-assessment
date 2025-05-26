@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Login } from './login.state';
-import { User } from '../user/user.state';
+import { User } from '../../users/redux/user.state';
 
 export const loadLoginState = createAction('[Login] Load Login State');
 

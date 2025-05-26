@@ -11,6 +11,7 @@ import {
 
 export const userCredentialsReducer = createReducer(
   initialUserState,
+
   on(loadUsers, (state) => ({
     ...state,
     loading: true,
@@ -42,6 +43,6 @@ export const userCredentialsReducer = createReducer(
 
   on(deleteUser, (state, { deleteUserId }) => ({
     ...state,
-    users: state.users.filter((user) => user.id !== deleteUserId),
+    users: state.users.filter((u) => u.id !== deleteUserId),
   }))
 );

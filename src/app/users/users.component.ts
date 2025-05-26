@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
-import { Store } from '@ngrx/store';
-import { selectAllUsers } from '../redux/user/user.selectors';
-import { addUser, deleteUser, updateUser } from '../redux/user/user.action';
-import { User } from '../redux/user/user.state';
-import { mapResultToUser } from './utils/user.utils';
+import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
-import { MatIcon } from '@angular/material/icon';
+
+import { UsersService } from './users.service';
+import { User } from './redux/user.state';
 import { SharedModule } from './shared/shared.module';
 import { UserFormDialogComponent } from './shared/user-form-dialog/user-form-dialog.component';
 
@@ -20,7 +18,7 @@ import { UserFormDialogComponent } from './shared/user-form-dialog/user-form-dia
     CommonModule,
     MatButtonModule,
     MatTableModule,
-    MatIcon,
+    MatIconModule,
     SharedModule,
   ],
   templateUrl: './users.component.html',
@@ -28,6 +26,7 @@ import { UserFormDialogComponent } from './shared/user-form-dialog/user-form-dia
 })
 export class UsersComponent implements OnInit {
   displayedColumns: string[] = [
+    'id',
     'userName',
     'email',
     'name',
@@ -35,11 +34,12 @@ export class UsersComponent implements OnInit {
     'actions',
   ];
   dataSource$!: Observable<User[]>;
+  private userService = inject(UsersService);
 
-  constructor(private dialog: MatDialog, private store: Store) {}
+  constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.dataSource$ = this.store.select(selectAllUsers);
+    this.dataSource$ = this.userService.getAllUsers();
   }
 
   openUserDialog(mode: 'create' | 'edit', user?: User): void {
@@ -47,32 +47,21 @@ export class UsersComponent implements OnInit {
       width: '600px',
       disableClose: true,
       data: {
-        mode: mode,
+        mode,
         initialUserData: mode === 'edit' ? user : null,
       },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        if (mode === 'create') {
-          this.store.dispatch(addUser({ user: mapResultToUser(result) }));
-        } else {
-          this.store.dispatch(
-            updateUser({
-              user: { ...mapResultToUser(result), id: user?.id || '' },
-            })
-          );
-        }
+        mode === 'create'
+          ? this.userService.addUser(result)
+          : this.userService.updateUser({ ...result, id: user?.id });
       }
     });
   }
 
   deleteClicked(userId: string): void {
-    console.log('Delete clicked for user ID:', userId);
-    this.store.dispatch(deleteUser({ deleteUserId: userId }));
-  }
-
-  editClicked(user: User): void {
-    console.log('Edit clicked for user:', user);
+    this.userService.deleteUser(userId);
   }
 }

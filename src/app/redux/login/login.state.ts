@@ -1,4 +1,4 @@
-import { User } from "../user/user.state";
+import { User } from '../../users/redux/user.state';
 
 export interface Login {
   email: string;

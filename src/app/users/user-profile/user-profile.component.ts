@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
-import { selectUserById } from '../../redux/user/user.selectors';
-import { User } from '../../redux/user/user.state';
+import { User } from '../redux/user.state';
+import { selectUserById } from '../redux/user.selectors';
 
 @Component({
   selector: 'app-user-profile',

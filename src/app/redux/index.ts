@@ -1,9 +1,9 @@
 import { provideState } from '@ngrx/store';
 import { customersReducer } from './customers/customers.reducer';
 import { userRolesReducer } from './roles/roles.reducer';
-import { userCredentialsReducer } from './user/user.reducer';
 import { workOrdersReducer } from './work-orders/workOrder.reducer';
 import { loginReducer } from './login/login.reducer';
+import { userCredentialsReducer } from '../users/redux/user.reducer';
 
 export const stateProviders = [
   { name: 'customers', reducer: customersReducer },

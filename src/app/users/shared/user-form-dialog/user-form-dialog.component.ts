@@ -10,8 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
-import { User } from '../../../redux/user/user.state';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { User } from '../../redux/user.state';
 
 export interface DialogData {
   mode: 'create' | 'edit';
