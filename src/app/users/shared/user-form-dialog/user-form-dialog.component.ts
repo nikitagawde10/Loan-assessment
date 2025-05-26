@@ -1,11 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  inject,
-  Inject,
-} from '@angular/core';
+import { Component, inject, Inject } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
