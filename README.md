@@ -13,3 +13,11 @@ ng serve
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
 To view the website [click here](https://682c2bdede82e972bdef2b7d--lucky-mandazi-c98253.netlify.app/login)
+### User credentials to see the guards in place ( each user role has access to selected components)
+| Email        | Password    |       
+| ------------- |:-------------:|
+| thor.odinson@marvel.com      | thor  
+| bucky.barnes@marvel.com      | bucky      | 
+| rocket.gotg@marvel.com | rocket      | 
+
+
