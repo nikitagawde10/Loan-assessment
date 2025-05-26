@@ -12,7 +12,7 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-To view the website [click here](lucky-mandazi-c98253.netlify.app)
+#### View the website here - https://lucky-mandazi-c98253.netlify.app/login
 ### User credentials to see the guards in place ( each user role has access to selected components)
 Admins and SuperAdmins have unrestricted access to all components. Check the user list in Users component after logging in as Admin 
 | Email        | Password    |    Role   
