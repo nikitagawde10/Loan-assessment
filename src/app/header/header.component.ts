@@ -57,7 +57,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   openUserProfile(): void {
     if (this.userId) {
-      this.router.navigate(['/user-profile', this.userId]);
+      this.router.navigate(['/users/user-profile', this.userId]);
     }
   }
 }
