@@ -18,7 +18,6 @@ export const routes: Routes = [
 
   {
     path: 'users',
-    component: UsersComponent,
     canActivate: [AuthGuard],
     data: { roles: ['user', 'admin', 'superadmin', 'hr'] },
     loadComponent: () =>
@@ -26,7 +25,6 @@ export const routes: Routes = [
   },
   {
     path: 'forbidden',
-    component: AccessForbiddenComponent,
     loadComponent: () =>
       import('./access-forbidden/access-forbidden.component').then(
         (m) => m.AccessForbiddenComponent
@@ -34,7 +32,6 @@ export const routes: Routes = [
   },
   {
     path: 'roles',
-    component: UserRolesComponent,
     canActivate: [AuthGuard],
     data: { roles: ['admin', 'superadmin'] },
     loadComponent: () =>
@@ -44,7 +41,6 @@ export const routes: Routes = [
   },
   {
     path: 'permissions',
-    component: UserPermissionsComponent,
     canActivate: [AuthGuard],
     data: { roles: ['admin', 'superadmin'] },
     loadComponent: () =>
@@ -54,7 +50,6 @@ export const routes: Routes = [
   },
   {
     path: 'upload-documents',
-    component: UploadDocumentsComponent,
     canActivate: [AuthGuard],
     data: { roles: ['admin', 'superadmin'] },
     loadComponent: () =>
@@ -64,7 +59,6 @@ export const routes: Routes = [
   },
   {
     path: 'customers',
-    component: CustomersComponent,
     canActivate: [AuthGuard],
     data: { roles: ['admin', 'user', 'superadmin', 'hr'] },
     loadComponent: () => {
@@ -75,7 +69,6 @@ export const routes: Routes = [
   },
   {
     path: 'work-orders',
-    component: WorkOrdersComponent,
     canActivate: [AuthGuard],
     data: { roles: ['admin', 'superadmin', 'hr'] },
     loadComponent: () =>
