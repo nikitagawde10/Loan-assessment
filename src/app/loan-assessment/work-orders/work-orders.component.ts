@@ -1,16 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatChipsModule } from '@angular/material/chips';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import {
-  WorkOrder,
-  WorkOrderStatus,
-} from '../../redux/work-orders/workOrders.state';
-import { selectAllWorkOrders } from '../../redux/work-orders/workOrder.selectors';
+
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
-import { changeWorkOrderStatus } from '../../redux/work-orders/workOrder.action';
+import { WorkOrder, WorkOrderStatus } from './redux/workOrders.state';
+import { WorkOrdersService } from './work-orders.service';
 
 @Component({
   selector: 'app-work-orders',
@@ -26,6 +23,7 @@ import { changeWorkOrderStatus } from '../../redux/work-orders/workOrder.action'
   styleUrls: ['./work-orders.component.css'],
 })
 export class WorkOrdersComponent implements OnInit {
+  workOrderService = inject(WorkOrdersService);
   statusOptions: WorkOrderStatus[] = ['Pending', 'Approved', 'Rejected'];
 
   displayedColumns: string[] = ['orderId', 'customer', 'date', 'status'];
@@ -35,12 +33,10 @@ export class WorkOrdersComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.dataSource$ = this.store.select(selectAllWorkOrders);
+    this.dataSource$ = this.workOrderService.selectAllWorkOrders();
   }
 
   onStatusChange(orderId: string, newStatus: string) {
-    this.store.dispatch(
-      changeWorkOrderStatus({ workOrderId: orderId, status: newStatus as any })
-    );
+    this.workOrderService.changeWorkOrderStatus(orderId, newStatus);
   }
 }
