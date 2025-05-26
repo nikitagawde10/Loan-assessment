@@ -1,15 +1,7 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { UsersComponent } from './users/users.component';
-import { UserRolesComponent } from './users/user-roles/user-roles.component';
-import { UserPermissionsComponent } from './users/user-permissions/user-permissions.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { CustomersComponent } from './loan-assessment/customers/customers.component';
-import { UploadDocumentsComponent } from './loan-assessment/upload-documents/upload-documents.component';
-import { WorkOrdersComponent } from './loan-assessment/work-orders/work-orders.component';
 import { AuthGuard } from './guards/auth.guard';
-import { AccessForbiddenComponent } from './access-forbidden/access-forbidden.component';
-import { UserProfileComponent } from './users/user-profile/user-profile.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
