@@ -9,7 +9,7 @@
       [matMenuTriggerFor]="userMenu"
     >
       <div class="user-avatar" *ngIf="userEmail$ | async as userEmail">
-        {{ (userEmail || "").charAt(0).toUpperCase() }}
+        {{ userEmail ? userEmail.charAt(0).toUpperCase() : '' }}
       </div>
     </button>
     <mat-menu #userMenu="matMenu">

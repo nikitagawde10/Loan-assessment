@@ -10,7 +10,6 @@ import { Observable, Subscription } from 'rxjs';
 import { logout } from '../redux/login/login.action';
 import { CommonModule } from '@angular/common';
 import { selectLoggedInUser } from '../redux/login/login.selectors';
-import { UserProfileComponent } from '../users/user-profile/user-profile.component';
 
 @Component({
   selector: 'app-header',

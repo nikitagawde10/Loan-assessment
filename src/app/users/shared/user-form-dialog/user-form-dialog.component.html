@@ -1,12 +1,12 @@
-<div class="create-user-container">
+<div class="form-user-container">
   <mat-card class="user-card">
     <div class="logo-container">
-      <div class="create-user-title">Create User</div>
+      <div class="form-user-title">Create User</div>
       <div class="close-icon" (click)="onCancel()">✕</div>
     </div>
 
     <mat-card-content>
-      <form [formGroup]="createUserForm" (ngSubmit)="onUserCreated()">
+      <form [formGroup]="createUserForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="outline" class="full-width">
           <input
             matInput
@@ -78,11 +78,11 @@
           <button
             mat-flat-button
             color="primary"
-            class="create-button"
+            class="form-button"
             type="submit"
             [disabled]="!createUserForm.valid"
           >
-            Create
+            {{ mode === "edit" ? "Save Changes" : "Create" }}
           </button>
         </div>
       </form>

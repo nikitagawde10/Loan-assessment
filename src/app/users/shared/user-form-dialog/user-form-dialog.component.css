@@ -1,4 +1,4 @@
-.create-user-container {
+.form-user-container {
   padding: 16px;
   background-color: #f9f9f9;
 }
@@ -16,7 +16,7 @@
   margin-bottom: 20px;
 }
 
-.create-user-title {
+.form-user-title {
   font-size: 20px;
   font-weight: 500;
 }
@@ -44,7 +44,7 @@
   color: #333;
 }
 
-.create-button {
+.form-user-button {
   background-color: #007bff;
   color: white;
   min-width: 100px;
