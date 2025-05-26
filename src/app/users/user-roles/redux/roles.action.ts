@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { UserRole } from '../roles/roles.state';
+import { UserRole } from './roles.state';
 
 export const loadUserRoles = createAction('[UserRoles] Load UserRoles');
 

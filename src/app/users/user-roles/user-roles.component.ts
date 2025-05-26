@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   MatTable,
@@ -6,14 +6,13 @@ import {
   MatTableModule,
 } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
-import { UserRole } from '../../redux/roles/roles.state';
-import { select, Store } from '@ngrx/store';
-import { selectAllUserRoles } from '../../redux/roles/roles.selectors';
+import { Store } from '@ngrx/store';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateRoleComponent } from './create-role/create-role.component';
-import { addUserRole, deleteRole } from '../../redux/roles/roles.action';
 import { MatIcon } from '@angular/material/icon';
 import { Observable } from 'rxjs';
+import { UserRole } from './redux/roles.state';
+import { UserRoleService } from './user-role.service';
 
 @Component({
   selector: 'app-user-roles',
@@ -24,7 +23,7 @@ import { Observable } from 'rxjs';
 })
 export class UserRolesComponent implements OnInit {
   @ViewChild(MatTable) table!: MatTable<UserRole>;
-
+  roleService = inject(UserRoleService);
   constructor(private store: Store, private dialog: MatDialog) {}
 
   displayedColumns: string[] = ['roleName', 'protected', 'actions'];
@@ -32,7 +31,7 @@ export class UserRolesComponent implements OnInit {
   dataSource$!: Observable<UserRole[]>;
 
   ngOnInit(): void {
-    this.dataSource$ = this.store.select(selectAllUserRoles);
+    this.dataSource$ = this.roleService.selectAllUserRoles();
   }
 
   openCreateRoleDialog(): void {
@@ -43,12 +42,12 @@ export class UserRolesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.store.dispatch(addUserRole({ role: result }));
+        this.roleService.addUserRole(result);
       }
     });
   }
   deleteClicked(roleName: string): void {
     console.log('Delete clicked for role name:', roleName);
-    this.store.dispatch(deleteRole({ roleName: roleName }));
+    this.roleService.deleteRole(roleName);
   }
 }
