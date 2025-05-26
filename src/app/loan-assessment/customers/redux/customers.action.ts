@@ -12,8 +12,3 @@ export const loadCustomersFailure = createAction(
   '[Customers] Load Failure',
   props<{ error: string }>()
 );
-
-export const addCustomer = createAction(
-  '[Customers] Add Customer',
-  props<{ customer: Customer }>()
-);

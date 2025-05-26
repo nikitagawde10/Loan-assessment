@@ -1,12 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { MatTable } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
-import { selectAllCustomers } from '../../redux/customers/customers.selectors';
-import { Customer } from '../../redux/customers/customers.state';
+import { Customer } from './redux/customers.state';
+import { CustomersService } from './customers.service';
 
 @Component({
   selector: 'app-customers',
@@ -18,13 +18,13 @@ import { Customer } from '../../redux/customers/customers.state';
 export class CustomersComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'panNumber', 'aadharNumber'];
   dataSource = new MatTableDataSource<Customer>([]);
-
+  customerService = inject(CustomersService);
   @ViewChild(MatTable) table!: MatTable<Customer>;
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.store.select(selectAllCustomers).subscribe((customers) => {
+    this.customerService.getAllCustomers().subscribe((customers) => {
       if (customers) {
         this.dataSource.data = customers;
         if (this.table) {

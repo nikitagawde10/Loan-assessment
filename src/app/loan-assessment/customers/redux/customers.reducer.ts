@@ -1,6 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
 import {
-  addCustomer,
   loadCustomers,
   loadCustomersFailure,
   loadCustomersSuccess,
@@ -27,10 +26,5 @@ export const customersReducer = createReducer(
     ...state,
     loading: false,
     error,
-  })),
-
-  on(addCustomer, (state, { customer }) => ({
-    ...state,
-    customers: [...state.customers, customer],
   }))
 );
