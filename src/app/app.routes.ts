@@ -7,13 +7,11 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: 'users',
-    data: { roles: ['user', 'admin', 'superadmin', 'hr'] },
     loadChildren: () =>
       import('./users/users.module').then((m) => m.UsersModule),
   },
   {
     path: 'loan-assessment',
-    data: { roles: ['admin', 'superadmin', 'hr'] },
     loadChildren: () =>
       import('./loan-assessment/loan-assessment.module').then(
         (m) => m.LoanAssessmentModule
