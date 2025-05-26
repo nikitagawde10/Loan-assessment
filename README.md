@@ -14,10 +14,11 @@ Once the server is running, open your browser and navigate to `http://localhost:
 
 To view the website [click here](https://682c2bdede82e972bdef2b7d--lucky-mandazi-c98253.netlify.app/login)
 ### User credentials to see the guards in place ( each user role has access to selected components)
-| Email        | Password    |       
-| ------------- |:-------------:|
-| thor.odinson@marvel.com      | thor  
-| bucky.barnes@marvel.com      | bucky      | 
-| rocket.gotg@marvel.com | rocket      | 
+Admins and SuperAdmins have unrestricted access to all components. Check the user list in Users component after logging in as Admin 
+| Email        | Password    |    Role   
+| ------------- |:-------------:| --------:|
+| thor.odinson@marvel.com      | thor  |Super Admin
+| bucky.barnes@marvel.com      | bucky      | HR
+| rocket.gotg@marvel.com | rocket      | User
 
 
