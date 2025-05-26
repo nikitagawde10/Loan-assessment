@@ -12,11 +12,11 @@ export class WorkOrdersService {
   constructor() {}
 
   selectAllWorkOrders(): Observable<WorkOrder[]> {
-    return this.store.select((state) => state.workOrders.workOrders);
+    return this.store!.select((state) => state.workOrders.workOrders);
   }
 
   changeWorkOrderStatus(orderId: string, newStatus: string): void {
-    this.store.dispatch(
+    this.store!.dispatch(
       changeWorkOrderStatus({
         workOrderId: orderId,
         status: newStatus as any,
@@ -24,7 +24,3 @@ export class WorkOrdersService {
     );
   }
 }
-// addUser(data: any): void {
-//   const newUser = mapResultToUser(data);
-//   this.store.dispatch(addUser({ user: newUser }));
-// }

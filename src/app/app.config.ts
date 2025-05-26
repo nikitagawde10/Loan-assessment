@@ -12,7 +12,7 @@ import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideEffects } from '@ngrx/effects';
 
-import { stateProviders } from './redux';
+import { stateProviders } from '.';
 
 export const appConfig: ApplicationConfig = {
   providers: [

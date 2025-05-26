@@ -13,12 +13,12 @@ export class UserRoleService {
   constructor() {}
 
   selectAllUserRoles(): Observable<UserRole[]> {
-    return this.store.select(selectAllUserRoles);
+    return this.store!.select(selectAllUserRoles);
   }
   addUserRole(newRole: any) {
-    this.store.dispatch(addUserRole({ role: newRole }));
+    this.store!.dispatch(addUserRole({ role: newRole }));
   }
   deleteRole(roleName: string) {
-    this.store.dispatch(deleteRole({ roleName }));
+    this.store!.dispatch(deleteRole({ roleName }));
   }
 }

@@ -1,10 +1,15 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { loginSuccess, logout } from './redux/login/login.action';
-import { selectLoggedInUser } from './redux/login/login.selectors';
+import { loginSuccess, logout } from './redux/login.action';
+import {
+  selectIsLoggedIn,
+  selectLoggedInUser,
+  selectUserRole,
+} from './redux/login.selectors';
 import { take, map } from 'rxjs/operators';
-import { selectUser } from './users/redux/user.selectors';
+import { selectUser } from '../users/redux/user.selectors';
+import { User } from '../users/redux/user.state';
 
 @Injectable({
   providedIn: 'root',
@@ -40,5 +45,17 @@ export class AuthService {
     return this.store.select(selectLoggedInUser).pipe(
       map((user) => (user ? user.email : null)) // Map the user object to the email or null
     );
+  }
+
+  isUserLoggedIn(): Observable<boolean> {
+    return this.store.select(selectIsLoggedIn);
+  }
+
+  getLoggedInUser(): Observable<User | null> {
+    return this.store.select(selectLoggedInUser);
+  }
+
+  getUserRole(): Observable<string | null> {
+    return this.store.select(selectUserRole);
   }
 }

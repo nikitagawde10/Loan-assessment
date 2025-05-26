@@ -11,7 +11,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
-import { AuthService } from '../auth.service';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-login',

@@ -1,15 +1,13 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../login/auth.service';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { logout } from '../redux/login/login.action';
 import { CommonModule } from '@angular/common';
-import { selectLoggedInUser } from '../redux/login/login.selectors';
 
 @Component({
   selector: 'app-header',
@@ -37,11 +35,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.userEmail$ = this.authService.getUserEmail();
 
-    this.subscription = this.store
-      .select(selectLoggedInUser)
-      .subscribe((user) => {
-        this.userId = user?.id || null;
-      });
+    this.subscription = this.authService.getLoggedInUser().subscribe((user) => {
+      this.userId = user?.id || null;
+    });
   }
 
   ngOnDestroy(): void {
@@ -51,7 +47,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   logout(): void {
-    this.store.dispatch(logout());
+    this.authService.logout();
     this.router.navigate(['/login']);
   }
 

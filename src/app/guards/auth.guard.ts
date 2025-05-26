@@ -6,18 +6,16 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Store } from '@ngrx/store';
-import {
-  selectIsLoggedIn,
-  selectUserRole,
-} from '../redux/login/login.selectors';
+
 import { Observable, combineLatest } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
+import { AuthService } from '../login/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard {
   private store = inject(Store);
   private router = inject(Router);
-
+  authService = inject(AuthService);
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -31,8 +29,8 @@ export class AuthGuard {
     const allowedRoles = targetRoute.data['roles'] as string[] | undefined;
 
     return combineLatest([
-      this.store.select(selectIsLoggedIn),
-      this.store.select(selectUserRole),
+      this.authService.isUserLoggedIn(), // Check if user is logged in
+      this.authService.getUserRole(), // Get the user's role
     ]).pipe(
       take(1), // Only take one emission
       tap(([isLoggedIn, userRole]) => {
