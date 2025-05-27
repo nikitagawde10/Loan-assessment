@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { addUser, deleteUser, updateUser } from './redux/user.action';
 import { User } from './redux/user.state';
 import { mapResultToUser } from './utils/user.utils';
-import { selectAllUsers } from './redux/user.selectors';
+import { selectAllUsers, selectUserById } from './redux/user.selectors';
 import { Observable } from 'rxjs';
 import { ToastService } from './shared/toast/toast.service';
 
@@ -11,6 +11,7 @@ import { ToastService } from './shared/toast/toast.service';
 export class UsersService {
   private store = inject(Store);
   private toastService = inject(ToastService);
+
   getAllUsers(): Observable<User[]> {
     return this.store.select(selectAllUsers);
   }
@@ -39,5 +40,10 @@ export class UsersService {
       `User with ID ${userId} deleted successfully!`,
       'delete'
     );
+  }
+
+  showUserProfile(userId: string): Observable<User | undefined> {
+    console.log(`Navigating to user profile with ID: ${userId}`);
+    return this.store.select(selectUserById(userId));
   }
 }
