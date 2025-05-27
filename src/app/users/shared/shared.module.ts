@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { UserFormDialogComponent } from './user-form-dialog/user-form-dialog.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [],
@@ -19,7 +20,8 @@ import { UserFormDialogComponent } from './user-form-dialog/user-form-dialog.com
     MatSelectModule,
     MatCardModule,
     UserFormDialogComponent,
+    MatSnackBarModule,
   ],
-  exports: [UserFormDialogComponent],
+  exports: [UserFormDialogComponent, MatSnackBarModule],
 })
 export class SharedModule {}

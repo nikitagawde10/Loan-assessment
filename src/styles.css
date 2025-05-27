@@ -1,12 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
-@import '@angular/material/prebuilt-themes/azure-blue.css';
+@import "@angular/material/prebuilt-themes/azure-blue.css";
 
-html, body { 
-  height: 100%; 
+html,
+body {
+  height: 100%;
 }
 
-body { 
-  margin: 0; 
+body {
+  margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: #fafafa;
+}
+/* General toast styling */
+.mat-snack-bar-container {
+  color: white;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Common base */
+.toast-success .mdc-snackbar__surface {
+  background-color: #4caf50 !important;
+  color: white !important;
+}
+
+.toast-error .mdc-snackbar__surface {
+  background-color: #f44336 !important;
+  color: white !important;
+}
+
+.toast-warning .mdc-snackbar__surface {
+  background-color: #ff9800 !important;
+  color: black !important;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(-20%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.mat-mdc-snack-bar-container
+  .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled).mat-unthemed {
+  color: white !important;
 }
