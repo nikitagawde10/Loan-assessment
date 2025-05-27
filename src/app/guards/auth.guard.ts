@@ -1,62 +1,78 @@
 import { Injectable, inject } from '@angular/core';
 import {
-  ActivatedRouteSnapshot,
   Router,
+  ActivatedRouteSnapshot,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Store } from '@ngrx/store';
-
 import { Observable, combineLatest } from 'rxjs';
-import { map, take, tap } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 import { AuthService } from '../login/auth.service';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthGuard {
-  private store = inject(Store);
+  private authService = inject(AuthService);
   private router = inject(Router);
-  authService = inject(AuthService);
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> {
-    // 🔍 Traverse to the deepest child route to get route-specific data
+    const allowedRoles = this.getAllowedRoles(route);
+
+    return combineLatest([
+      this.authService.isUserLoggedIn(),
+      this.authService.getUserRole(),
+    ]).pipe(
+      take(1),
+      map(([isLoggedIn, userRole]) =>
+        this.checkAccess(isLoggedIn, userRole, allowedRoles, state.url)
+      )
+    );
+  }
+
+  private getAllowedRoles(route: ActivatedRouteSnapshot): string[] | undefined {
+    // Find the deepest child route to get role restrictions
     let targetRoute = route;
     while (targetRoute.firstChild) {
       targetRoute = targetRoute.firstChild;
     }
+    return targetRoute.data['roles'] as string[] | undefined;
+  }
 
-    const allowedRoles = targetRoute.data['roles'] as string[] | undefined;
-
-    return combineLatest([
-      this.authService.isUserLoggedIn(), // Check if user is logged in
-      this.authService.getUserRole(), // Get the user's role
-    ]).pipe(
-      take(1), // Only take one emission
-      tap(([isLoggedIn, userRole]) => {
-        console.log('AuthGuard: Route =', state.url);
-        console.log('AuthGuard: Allowed roles =', allowedRoles);
-        console.log('AuthGuard: Logged in =', isLoggedIn);
-        console.log('AuthGuard: User role =', userRole);
-      }),
-      map(([isLoggedIn, userRole]) => {
-        // 🛑 If user is not logged in, redirect to login
-        if (!isLoggedIn) {
-          return this.router.parseUrl('/login');
-        }
-
-        // ✅ If route has role restrictions, validate them
-        if (allowedRoles?.length) {
-          if (userRole && allowedRoles.includes(userRole)) {
-            return true; // Access granted
-          } else {
-            return this.router.parseUrl('/forbidden'); // ❌ Forbidden
-          }
-        }
-
-        // ✅ If no roles specified, allow access
-        return true;
-      })
+  private checkAccess(
+    isLoggedIn: boolean,
+    userRole: string | null,
+    allowedRoles: string[] | undefined,
+    routeUrl: string
+  ): boolean | UrlTree {
+    console.log(
+      `🔍 AuthGuard Check - Route: ${routeUrl}, Roles: ${allowedRoles}, User: ${userRole}, Logged in: ${isLoggedIn}`
     );
+
+    // Not logged in? Go to login
+    if (!isLoggedIn) {
+      console.log('❌ User not logged in - redirecting to login');
+      return this.router.parseUrl('/login');
+    }
+
+    // No role restrictions? Allow access
+    if (!allowedRoles?.length) {
+      console.log('✅ No role restrictions - access granted');
+      return true;
+    }
+
+    // Check if user has required role
+    if (userRole && allowedRoles.includes(userRole)) {
+      console.log('✅ User has required role - access granted');
+      return true;
+    }
+
+    // User doesn't have required role
+    console.log('❌ Insufficient permissions - redirecting to forbidden');
+    return this.router.parseUrl('/forbidden');
   }
 }
