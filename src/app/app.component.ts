@@ -11,6 +11,7 @@ import { AuthService } from './login/auth.service';
 import { Subscription, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { tap } from 'rxjs/operators';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,7 @@ import { tap } from 'rxjs/operators';
     MatIconModule,
     HomeNavComponent,
     HeaderComponent,
+    RxjsComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

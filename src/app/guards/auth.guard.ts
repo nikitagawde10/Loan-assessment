@@ -1,3 +1,5 @@
+// Let's break down the AuthGuard step by step
+
 import { Injectable, inject } from '@angular/core';
 import {
   Router,
@@ -7,7 +9,6 @@ import {
 } from '@angular/router';
 import { Observable, combineLatest } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
 import { AuthService } from '../login/auth.service';
 
 @Injectable({
@@ -23,19 +24,23 @@ export class AuthGuard {
   ): Observable<boolean | UrlTree> {
     const allowedRoles = this.getAllowedRoles(route);
 
+    // 🔍 STEP 1: combineLatest - Wait for BOTH observables to emit
     return combineLatest([
-      this.authService.isUserLoggedIn(),
-      this.authService.getUserRole(),
+      this.authService.isUserLoggedIn(), // Observable<boolean>
+      this.authService.getUserRole(), // Observable<string | null>
     ]).pipe(
+      // 🔍 STEP 2: take(1) - Only take the first emission, then complete
       take(1),
+
+      // 🔍 STEP 3: map - Transform the data
       map(([isLoggedIn, userRole]) =>
         this.checkAccess(isLoggedIn, userRole, allowedRoles, state.url)
       )
     );
   }
 
+  // Helper methods...
   private getAllowedRoles(route: ActivatedRouteSnapshot): string[] | undefined {
-    // Find the deepest child route to get role restrictions
     let targetRoute = route;
     while (targetRoute.firstChild) {
       targetRoute = targetRoute.firstChild;
