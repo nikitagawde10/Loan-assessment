@@ -7,25 +7,25 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ToastService {
   constructor(private snackBar: MatSnackBar) {}
 
-  displayMessage(message: string, type: 'create' | 'update' | 'delete'): void {
-    this.snackBar.open(message, 'Close', {
-      duration: 3000,
-      panelClass: [this.getPanelClass(type)],
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
-    });
-  }
+  displayMessage(
+    message: string,
+    type: 'create' | 'update' | 'delete'
+  ): Promise<void> {
+    const panelClass = {
+      create: 'toast-success',
+      update: 'toast-warning',
+      delete: 'toast-error',
+    }[type];
 
-  private getPanelClass(type: 'create' | 'update' | 'delete'): string {
-    switch (type) {
-      case 'create':
-        return 'toast-success';
-      case 'update':
-        return 'toast-warning';
-      case 'delete':
-        return 'toast-error';
-      default:
-        return '';
-    }
+    return new Promise<void>((resolve) => {
+      const snackRef = this.snackBar.open(message, 'Close', {
+        duration: 3000,
+        panelClass: [panelClass],
+      });
+
+      snackRef.afterDismissed().subscribe(() => {
+        resolve(); // Resolves the promise after toast disappears
+      });
+    });
   }
 }

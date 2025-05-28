@@ -8,6 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { UserFormDialogComponent } from './user-form-dialog/user-form-dialog.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { DialogComponent } from './dialog/dialog.component';
 
 @NgModule({
   declarations: [],
@@ -21,7 +22,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatCardModule,
     UserFormDialogComponent,
     MatSnackBarModule,
+    DialogComponent,
   ],
-  exports: [UserFormDialogComponent, MatSnackBarModule],
+  exports: [UserFormDialogComponent, MatSnackBarModule, DialogComponent],
 })
 export class SharedModule {}

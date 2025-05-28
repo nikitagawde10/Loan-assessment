@@ -1,0 +1,8 @@
+::ng-deep .mat-mdc-dialog-surface {
+  padding: 20px !important;
+}
+
+.cancel-button {
+  background-color: lightgray !important;
+  color: #333 !important;
+}

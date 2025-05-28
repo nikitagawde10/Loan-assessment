@@ -1,5 +1,3 @@
-// Let's break down the AuthGuard step by step
-
 import { Injectable, inject } from '@angular/core';
 import {
   Router,
