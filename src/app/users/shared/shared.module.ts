@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { UserFormDialogComponent } from './user-form-dialog/user-form-dialog.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DialogComponent } from './dialog/dialog.component';
+import { PermissionListComponent } from './permission-list/permission-list.component';
 
 @NgModule({
   declarations: [],
@@ -23,7 +24,13 @@ import { DialogComponent } from './dialog/dialog.component';
     UserFormDialogComponent,
     MatSnackBarModule,
     DialogComponent,
+    PermissionListComponent,
   ],
-  exports: [UserFormDialogComponent, MatSnackBarModule, DialogComponent],
+  exports: [
+    UserFormDialogComponent,
+    MatSnackBarModule,
+    DialogComponent,
+    PermissionListComponent,
+  ],
 })
 export class SharedModule {}

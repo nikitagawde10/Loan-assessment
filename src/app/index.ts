@@ -5,6 +5,7 @@ import { loginReducer } from './login/redux/login.reducer';
 import { userCredentialsReducer } from './users/redux/user.reducer';
 import { customersReducer } from './loan-assessment/customers/redux/customers.reducer';
 import { userRolesReducer } from './users/user-roles/redux/roles.reducer';
+import { permissionsReducer } from './users/user-permissions/redux/permissions.reducer';
 
 export const stateProviders = [
   { name: 'customers', reducer: customersReducer },
@@ -12,4 +13,5 @@ export const stateProviders = [
   { name: 'users', reducer: userCredentialsReducer },
   { name: 'workOrders', reducer: workOrdersReducer },
   { name: 'login', reducer: loginReducer },
+  { name: 'permissions', reducer: permissionsReducer },
 ].map(provideState);

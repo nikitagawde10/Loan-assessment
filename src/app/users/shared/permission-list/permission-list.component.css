@@ -1,0 +1,12 @@
+.permission-list {
+  padding: 16px;
+}
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.label {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,1 +1,36 @@
-<h1>To be implemented : User Permission</h1>
+<mat-card class="user-perms">
+  <mat-card-title>User Permissions</mat-card-title>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Select user</mat-label>
+    <mat-select
+      [(value)]="selectedUserId$"
+      (selectionChange)="onUserChange($event.value)"
+    >
+      <mat-option *ngFor="let u of users$ | async" [value]="u.userId">
+        {{ u.userName }} ({{ u.email }})
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <ng-container *ngIf="selectedUser as user">
+    <ng-container *ngIf="allPerms$ | async as allPermissions">
+      <app-permission-list
+        [title]="'Permissions for ' + (user.userName | uppercase)"
+        [availablePermissions]="allPermissions"
+        [selectedPermissions]="currentPerms"
+        (selectedPermissionsChange)="onPermsChanged($event)"
+        [readonly]="loading"
+      ></app-permission-list>
+    </ng-container>
+
+    <button
+      mat-flat-button
+      class="save-button"
+      (click)="saveChanges()"
+      [disabled]="!hasChanges || loading"
+    >
+      {{ loading ? "Saving…" : "Save Changes" }}
+    </button>
+  </ng-container>
+</mat-card>

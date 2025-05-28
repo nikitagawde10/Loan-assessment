@@ -1,0 +1,15 @@
+<mat-card class="permission-list">
+    <mat-card-title><h1>{{title}}</h1></mat-card-title>
+    <mat-divider></mat-divider>
+    <div class="grid">
+      <ng-container *ngFor="let p of availablePermissions">
+        <mat-checkbox
+        [checked]="isSelected(p)"
+        [disabled]="readonly"
+        (change)="onPermissionToggle(p, $event.checked)"
+      >
+        {{p.name}}
+      </mat-checkbox>
+      </ng-container>
+    </div>
+  </mat-card>
