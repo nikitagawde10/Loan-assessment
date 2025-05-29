@@ -31,6 +31,12 @@ const routes: Routes = [
         (m) => m.WorkOrdersComponent
       ),
   },
+  {
+    path: 'rxjs',
+    data: { roles: ['admin', 'superadmin', 'hr'] },
+    loadComponent: () =>
+      import('../rxjs/rxjs.component').then((m) => m.RxjsComponent),
+  },
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],
