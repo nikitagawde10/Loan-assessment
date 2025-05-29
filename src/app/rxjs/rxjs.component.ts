@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { Observable, combineLatest, map, take } from 'rxjs';
+import { SharedModule } from '../users/shared/shared.module';
+import { initialPermissionsState } from '../users/user-permissions/redux/permissions.state';
 
 @Component({
   selector: 'app-rxjs',
   standalone: true,
-  imports: [MatButton],
+  imports: [MatButton, SharedModule],
   templateUrl: './rxjs.component.html',
   styleUrl: './rxjs.component.css',
 })
 export class RxjsComponent {
+  permissions = initialPermissionsState.permissions;
   // 📚 Let me explain each RxJS concept with simple examples:
 
   // ============================================================================
