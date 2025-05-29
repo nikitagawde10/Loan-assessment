@@ -17,16 +17,16 @@ export class PermissionListComponent {
   @Input() selectedPermissions: Permission[] = [];
   @Input() readonly = false;
 
-  @Output() selectedPermissionsChange = new EventEmitter<Permission[]>();
+  @Output() selectedPermissionsChange = new EventEmitter<Permission[]>(); //returns an array of permissions
 
-  isSelected(p: Permission) {
+  isSelected(p: Permission): boolean {
     return this.selectedPermissions.some((s) => s.id === p.id);
   }
 
-  onPermissionToggle(p: Permission, checked: boolean) {
+  onPermissionToggle(p: Permission, checked: boolean): void {
     const next = checked
-      ? [...this.selectedPermissions, p]
-      : this.selectedPermissions.filter((x) => x.id !== p.id);
+      ? [...this.selectedPermissions, p] //if newly checked then add it to the list
+      : this.selectedPermissions.filter((x) => x.id !== p.id); //unchecked so remove it from the list
     this.selectedPermissionsChange.emit(next);
   }
 }

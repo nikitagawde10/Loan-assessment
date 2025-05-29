@@ -4,25 +4,27 @@
   <mat-form-field appearance="fill">
     <mat-label>Select user</mat-label>
     <mat-select
-      [(value)]="selectedUserId$"
+      [value]="selectedUserId"
       (selectionChange)="onUserChange($event.value)"
     >
-      <mat-option *ngFor="let u of users$ | async" [value]="u.userId">
-        {{ u.userName }} ({{ u.email }})
+      <mat-option value="">-- Select a user --</mat-option>
+      <mat-option *ngFor="let user of users$ | async" [value]="user.userId">
+        {{ getUserDisplayName(user) }}
       </mat-option>
     </mat-select>
   </mat-form-field>
 
-  <ng-container *ngIf="selectedUser as user">
-    <ng-container *ngIf="allPerms$ | async as allPermissions">
+  <div *ngIf="selectedUser">
+    <div *ngIf="allPermissions$ | async as allPermissions">
       <app-permission-list
-        [title]="'Permissions for ' + (user.userName | uppercase)"
+        [title]="'Permissions for ' + (selectedUser.userName | uppercase)"
         [availablePermissions]="allPermissions"
-        [selectedPermissions]="currentPerms"
-        (selectedPermissionsChange)="onPermsChanged($event)"
+        [selectedPermissions]="currentPermissions"
+        (selectedPermissionsChange)="onPermissionsChanged($event)"
         [readonly]="loading"
-      ></app-permission-list>
-    </ng-container>
+      >
+      </app-permission-list>
+    </div>
 
     <button
       mat-flat-button
@@ -32,5 +34,5 @@
     >
       {{ loading ? "Saving…" : "Save Changes" }}
     </button>
-  </ng-container>
+  </div>
 </mat-card>
