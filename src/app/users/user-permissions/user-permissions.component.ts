@@ -1,15 +1,14 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Permission, UserPermission } from './redux/permissions.state';
 import { UserPermissionsService } from './user-permissions.service';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatOption, MatSelect } from '@angular/material/select';
-import { MatCard, MatCardTitle } from '@angular/material/card';
+import { MatCardTitle } from '@angular/material/card';
 import { SharedModule } from '../shared/shared.module';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { MatButton } from '@angular/material/button';
-import { DialogService } from '../shared/dialog/dialog.service';
 import { ToastService } from '../shared/toast/toast.service';
 
 @Component({
@@ -21,7 +20,7 @@ import { ToastService } from '../shared/toast/toast.service';
     MatSelect,
     MatOption,
     MatLabel,
-    MatCard,
+
     MatCardTitle,
     SharedModule,
     AsyncPipe,
