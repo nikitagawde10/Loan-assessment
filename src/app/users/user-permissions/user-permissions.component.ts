@@ -9,6 +9,8 @@ import { MatCard, MatCardTitle } from '@angular/material/card';
 import { SharedModule } from '../shared/shared.module';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { MatButton } from '@angular/material/button';
+import { DialogService } from '../shared/dialog/dialog.service';
+import { ToastService } from '../shared/toast/toast.service';
 
 @Component({
   selector: 'app-user-permissions',
@@ -30,7 +32,7 @@ import { MatButton } from '@angular/material/button';
 })
 export class UserPermissionsComponent implements OnDestroy {
   private destroy$ = new Subject<void>();
-
+  private toastService = inject(ToastService);
   selectedUserId = '';
   selectedUser: UserPermission | null = null;
   currentPermissions: Permission[] = [];
@@ -117,6 +119,7 @@ export class UserPermissionsComponent implements OnDestroy {
       console.error('UserPermissionsComponent: Error saving changes:', err);
     } finally {
       this.loading = false;
+      this.toastService.displayMessage('Permissions saved', 'create');
     }
   }
 
