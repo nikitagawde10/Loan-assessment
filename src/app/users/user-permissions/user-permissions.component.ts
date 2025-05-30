@@ -84,13 +84,12 @@ export class UserPermissionsComponent implements OnDestroy {
   get hasChanges(): boolean {
     if (!this.selectedUser) return false;
 
-    const sortPermissions = (perms: Permission[]) =>
-      [...perms].sort((a, b) => a.name.localeCompare(b.name));
+    if (this.currentPermissions.length !== this.originalPermissions.length) {
+      return true;
+    }
 
-    const currentSorted = sortPermissions(this.currentPermissions);
-    const originalSorted = sortPermissions(this.originalPermissions);
-
-    return JSON.stringify(currentSorted) !== JSON.stringify(originalSorted);
+    const currentIds = new Set(this.currentPermissions.map((p) => p.id));
+    return !this.originalPermissions.every((p) => currentIds.has(p.id));
   }
 
   async saveChanges() {

@@ -21,10 +21,8 @@ export class UserPermissionsService {
 
   updateUserPermissions(userId: string, perms: Permission[]): Promise<void> {
     return new Promise((resolve, reject) => {
-      // simulate API call
       setTimeout(() => {
         try {
-          // dispatch a redux action to update backend slice
           this.store.dispatch(
             addCustomPermission({
               userId,
