@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Details for {{ data.name }}</h2>
+<mat-dialog-content class="detail-content">
+  <p><strong>Height:</strong> {{ data.height }} cm</p>
+  <p><strong>Mass:</strong> {{ data.mass }} kg</p>
+  <p><strong>Gender:</strong> {{ data.gender }}</p>
+  <p><strong>Birth Year:</strong> {{ data.birth_year }}</p>
+  <p><strong>Eye Color:</strong> {{ data.eye_color }}</p>
+  <!-- add more fields as you like… -->
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

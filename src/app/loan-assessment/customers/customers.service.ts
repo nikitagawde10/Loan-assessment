@@ -1,17 +1,23 @@
 import { inject, Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { selectAllCustomers } from './redux/customers.selectors';
-import { Observable } from 'rxjs';
-import { Customer } from './redux/customers.state';
+import { APIService, People, Person } from './api.service';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CustomersService {
-  private store = inject(Store);
+  private apiService = inject(APIService);
 
-  getAllCustomers(): Observable<Customer[]> {
-    return this.store.select(selectAllCustomers);
+  getAllPeople(): Observable<People[]> {
+    return this.apiService
+      .getSWAPIPeople()
+      .pipe(tap((people) => console.table(people)));
+  }
+
+  getPersonDetails(id: number): Observable<Person> {
+    return this.apiService
+      .getSWAPIPerson(id)
+      .pipe(tap((person) => console.table(person)));
   }
   constructor() {}
 }

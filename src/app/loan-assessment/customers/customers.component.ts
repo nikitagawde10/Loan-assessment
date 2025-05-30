@@ -1,32 +1,53 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { MatTableDataSource } from '@angular/material/table';
-
 import { MatTable } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
-import { Customer } from './redux/customers.state';
 import { CustomersService } from './customers.service';
+import { People } from './api.service';
+import { MatButtonModule } from '@angular/material/button';
+import { catchError, EMPTY } from 'rxjs';
+import { ToastService } from '../../users/shared/toast/toast.service';
+import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-customers',
-  standalone: true,
-  imports: [CommonModule, MatTableModule],
+  imports: [CommonModule, MatTableModule, MatButtonModule],
+
   templateUrl: './customers.component.html',
   styleUrl: './customers.component.css',
 })
 export class CustomersComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'panNumber', 'aadharNumber'];
-  dataSource = new MatTableDataSource<Customer>([]);
-  customerService = inject(CustomersService);
-  @ViewChild(MatTable) table!: MatTable<Customer>;
+  constructor(private dialog: MatDialog) {}
+  private toast = inject(ToastService);
 
-  constructor(private store: Store) {}
+  getMoreDetails(id: number) {
+    this.customerService
+      .getPersonDetails(id)
+      .pipe(
+        catchError((err) => {
+          console.error(err);
+          this.toast.displayMessage('Failed to load details', 'delete');
+          return EMPTY;
+        })
+      )
+      .subscribe((personDetail) => {
+        this.dialog.open(CustomerDetailComponent, {
+          data: personDetail,
+        });
+      });
+  }
+
+  displayedColumns: string[] = ['uid', 'name', 'actions'];
+  dataSource = new MatTableDataSource<People>([]);
+  customerService = inject(CustomersService);
+  @ViewChild(MatTable) table!: MatTable<People>;
 
   ngOnInit(): void {
-    this.customerService.getAllCustomers().subscribe((customers) => {
-      if (customers) {
-        this.dataSource.data = customers;
+    this.customerService.getAllPeople().subscribe((people) => {
+      if (people) {
+        this.dataSource.data = people;
         if (this.table) {
           this.table.renderRows();
         }
